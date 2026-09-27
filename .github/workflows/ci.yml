@@ -1,0 +1,23 @@
+name: CI - Estudos Engenharia TI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verifica arquivos presentes
+        run: |
+          test -f README.md || exit 1
+          test -f artigo_final.md || exit 1
+          test -f complemento_moderno.md || exit 1
+          echo "Estrutura completa."
+      - name: Verifica conteúdo
+        run: |
+          grep -q "Alta Coesão" artigo_final.md || exit 1
+          grep -q "MVVM" complemento_moderno.md || exit 1
+          echo "Conteúdo verificado."

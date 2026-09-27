@@ -20,6 +20,24 @@ PASSO 6 — RELATÓRIO: Consolide em texto corrido (3 parágrafos) + tabela de r
 
 ---
 
+## Personas dos Agentes (Conferência Cruzada — Pragmático)
+
+| Persona | Nome | Função | Confere |
+|---|---|---|---|
+| Analista SE | Demerzel-SE | Avalia coesão, acoplamento, arquitetura, patterns | Se código segue MVC, Clean, EDA, CQRS, DDD conforme artigo |
+| Analista DevOps | Demerzel-DevOps | Avalia observabilidade, CI/CD, deploy, risco operacional | Se há tracing, métricas, automação, rollback seguro |
+| Auditor de Segurança | Demerzel-Sec | Avalia classificação de risco, impacto de segurança | Se tabela de risco está completa e precisa |
+| Revisor Pragmático | Demerzel-Prag | Confere over-engineering, justifica cada padrão | Se cada padrão agrega valor real ao contexto |
+
+PASSO 1 — SE: inventário + coesão/acoplamento.
+PASSO 2 — DevOps: observabilidade + CI/CD.
+PASSO 3 — Sec: classifica risco; confere evidências.
+PASSO 4 — Prag: confere over-engineering; decide divergências.
+PASSO 5 — Todos consolidam relatório; se divergência, Prag decide com base no artigo de referência.
+PASSO 6 — Continuidade: relatório atualizado a cada commit; agentes reexecutam sequência.
+
+---
+
 ## Texto Corrido (Modelo de Relatório — 3 Parágrafos)
 
 O sistema analisado opera sob a tecnologia predominante [X] e organiza-se como [monolito/modular/microserviço/híbrido]; a aderência ao modelo arquitetural previsto no artigo é de [Y]% na camada de apresentação, [Z]% no domínio e [W]% na infraestrutura. Os princípios de alta coesão e baixo acoplamento estão parcialmente presentes: [evidência de coesão alta] demonstra coesão preservada, enquanto [evidência de acoplamento direto] revela acoplamento residual entre [camada A] e [camada B], violando o contrato de separação estabelecido pelo MVC e pela Clean Architecture.

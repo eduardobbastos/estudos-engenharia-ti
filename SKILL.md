@@ -38,6 +38,16 @@ PASSO 6 — Continuidade: relatório atualizado a cada commit; agentes reexecuta
 
 ---
 
+## Pitfalls (regras imperativas + mecanismo)
+
+- Sempre confronte evidências com o artigo de referência antes de classificar risco — conclusões sem citação do artigo são especulação e geram falsos positivos no relatório.
+- Nunca aceite uma conclusão de um único agente sem conferência cruzada — o mecanismo é a divergência de perspectiva (SE vê coesão, DevOps vê operabilidade, Sec vê risco); sem conferência, o viés do agente domina.
+- Se o código não tem observabilidade nativa (logs estruturados, tracing), classifique automaticamente como risco Crítico — o mecanismo é a invisibilidade de falhas em produção; sem observabilidade, rollback e resposta a incidentes são impossíveis de avaliar.
+- Se um padrão (Singleton, Factory, Strategy, Adapter, DI) está presente mas não serve a uma responsabilidade coesa do módulo, registre como over-engineering e reduza a classificação de aderência — o mecanismo é a complexidade acidental que aumenta a superfície de ataque sem ganho arquitetural.
+- Sempre mantenha o artigo de referência (README.md) atualizado — se o artigo muda, o pseudo-algoritmo deve ser revalidado; caso contrário, a avaliação perde a base de verdade.
+
+---
+
 ## Texto Corrido (Modelo de Relatório — 3 Parágrafos)
 
 O sistema analisado opera sob a tecnologia predominante [X] e organiza-se como [monolito/modular/microserviço/híbrido]; a aderência ao modelo arquitetural previsto no artigo é de [Y]% na camada de apresentação, [Z]% no domínio e [W]% na infraestrutura. Os princípios de alta coesão e baixo acoplamento estão parcialmente presentes: [evidência de coesão alta] demonstra coesão preservada, enquanto [evidência de acoplamento direto] revela acoplamento residual entre [camada A] e [camada B], violando o contrato de separação estabelecido pelo MVC e pela Clean Architecture.

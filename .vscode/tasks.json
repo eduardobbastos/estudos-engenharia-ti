@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Validar Integridade do Ecossistema (CI Local)",
+      "type": "shell",
+      "command": "powershell -Command \"Get-Item README.md, SKILL.md, PLANNING_FRAMEWORK.md, PRINCIPIOS_SEGURANCA.md, .agents\\skills\\analista-arquitetura-codigo\\SKILL.md\"",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}

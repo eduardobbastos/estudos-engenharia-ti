@@ -4,10 +4,22 @@
     {
       "label": "Validar Integridade do Ecossistema (CI Local)",
       "type": "shell",
-      "command": "powershell -Command \"Get-Item README.md, SKILL.md, PLANNING_FRAMEWORK.md, PRINCIPIOS_SEGURANCA.md, .agents\\skills\\analista-arquitetura-codigo\\SKILL.md\"",
+      "command": "powershell -Command \"Get-Item README.md, SKILL.md, PLANNING_FRAMEWORK.md, PRINCIPIOS_SEGURANCA.md, .agents\\skills\\analista-arquitetura-codigo\\SKILL.md, .github\\copilot-instructions.md\"",
       "group": {
         "kind": "test",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Sincronizar e Validar Atualizações da Skill",
+      "type": "shell",
+      "command": "powershell -Command \"Copy-Item -Path 'SKILL.md' -Destination '.agents\\skills\\analista-arquitetura-codigo\\SKILL.md' -Force; Write-Host 'Skill sincronizada com sucesso!' -ForegroundColor Green\"",
+      "group": {
+        "kind": "build"
       },
       "presentation": {
         "reveal": "always",

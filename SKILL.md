@@ -335,6 +335,23 @@ GUARDRAIL: Modo Somente-Leitura (NUNCA modificacao direta de codigo)
 =========================================================================
 
 -------------------------------------------------------------------------
+PASSO 0 — INTEGRIDADE E ATUALIZACAO DA SKILL
+Agente: Agente-DevOps
+-------------------------------------------------------------------------
+
+  1. IDENTIFIQUE a versao no frontmatter YAML de ./SKILL.md
+  2. ASSEGURE a paridade e integridade das instrucoes:
+     - Verifique se ./.agents/skills/analista-arquitetura-codigo/SKILL.md
+       possui conteudo sincronizado com o ./SKILL.md da raiz.
+     - Se houver divergencia: sincronize a versao mais recente para a pasta .agents.
+  3. CHECAGEM DE ATUALIZACAO REMOTA (Upstream Check):
+     - Verifique se ha nova versao ou atualizacoes no repositorio remoto (git fetch).
+     - Se houver versao superior disponivel:
+       EMITA alerta no cabecalho do relatorio indicando a existencia de nova versao.
+  4. REGISTRE no inicio do relatorio emitido:
+     "Ecossistema: analista-arquitetura-codigo v[versao] (instrucoes validadas)"
+
+-------------------------------------------------------------------------
 PASSO 1 — INVENTARIO
 Agente: Agente-SE
 -------------------------------------------------------------------------
@@ -538,6 +555,7 @@ PASSO 8 — CONTINUIDADE
 -------------------------------------------------------------------------
 
   TRIGGER: a cada commit, pull request ou deploy significativo
+    EXECUTE PASSO 0 (garantir que a skill esta atualizada com o upstream)
     REEXECUTE PASSOS 1 a 7
     COMPARE percentuais com a avaliacao anterior
     ATUALIZE tabela de risco

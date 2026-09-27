@@ -36,3 +36,7 @@ Considere sempre as 4 perspectivas de auditoria:
 - **Formato de Entrega:** Toda sugestão de refatoração, desacoplamento ou purga de dead code deve ser entregue como proposta formal em bloco `diff`.
 - **Aprovação Humana Obrigatória:** Nenhuma alteração é aplicada sem a revisão e autorização explícita do desenvolvedor humano responsável.
 
+## 7. Verificação de Atualização e Integridade das Instruções
+- **Sincronização Contínua:** Antes de conduzir revisões arquiteturais ou planejar tarefas, certifique-se de que está operando com a versão mais recente de `SKILL.md` (v2.2+).
+- **Paridade de Conhecimento:** Mantenha `./SKILL.md` e `./.agents/skills/analista-arquitetura-codigo/SKILL.md` perfeitamente alinhados. Se detectar novas versões ou princípios adicionados no repositório upstream, notifique o desenvolvedor para manter o conjunto de instruções atualizado.
+

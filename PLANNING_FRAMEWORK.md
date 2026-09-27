@@ -320,12 +320,14 @@ AO FECHAR UM SPRINT / CICLO:
   [ ] Tabela de risco de segurança (SKILL.md PARTE V) atualizada?
   [ ] Algum padrão adotado que deve ser revisado pelo Pragmatismo (ETAPA 16)?
   [ ] Bounded contexts continuam corretos para o tamanho atual do sistema?
+  [ ] Instruções do repositório e versão da Skill verificadas contra o upstream (PASSO 0)?
 
 A CADA TRIMESTRE:
   [ ] A natureza do projeto continua sendo o mesmo Tipo (1 a 5)?
       SE mudou → reclassificar e ajustar práticas e organização.
   [ ] Modelagem de ameaças revisada (Princípio 10 de Segurança)?
   [ ] Observabilidade cobre 100% dos adapters e eventos de EDA?
+  [ ] Conjunto de instruções técnicas (SKILL.md, Framework e Princípios) revisado e atualizado?
 =========================================================================
 ```
 

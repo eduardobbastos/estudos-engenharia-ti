@@ -1,17 +1,18 @@
 ---
 name: analista-arquitetura-codigo
-version: 2.1
+version: 2.2
 description: >
   Skill consolidada para agentes de IA avaliarem aderência de código-fonte
   aos princípios de alta coesão, baixo acoplamento, MVC, GoF, DI, MVVM,
-  Clean/Hexagonal, EDA, CQRS, DDD, Observabilidade e Pragmatismo.
+  Clean/Hexagonal, EDA, CQRS, DDD, Observabilidade, Pragmatismo e
+  QA Estático (Eliminação de Código Morto e Duplicação).
   Inclui artigo técnico completo de referência, pseudo-algoritmo de execução,
   personas de agentes com conferência cruzada, modelo de relatório e tabela
   de risco de segurança.
   Artigo de referência: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/README.md
 ---
 
-# SKILL — Analista de Arquitetura de Código (v2.1)
+# SKILL — Analista de Arquitetura de Código (v2.2)
 
 > **Como usar esta skill:**
 > 1. Leia o **Artigo Técnico** (PARTE I) — referência conceitual completa.
@@ -262,7 +263,31 @@ Os padrões e arquiteturas deste artigo operam em três camadas complementares. 
 
 ---
 
-### ETAPA 17 — Relação Cruzada Completa
+### ETAPA 17 — QA Estático e Higienização de Código (Dead Code & Duplicação — DCE/CPD)
+
+- **Siglas:**
+  - **DCE:** *Dead Code Elimination* (Eliminação de Código Morto / Zumbi)
+  - **CPD:** *Copy-Paste Detector* / **DRY:** *Don't Repeat Yourself* (Detecção de Duplicação e Clones de Código)
+  - **QA:** *Quality Assurance* (Garantia da Qualidade de Software)
+- **Definição:** Técnica sistemática de análise estática e semântica para identificar, mensurar e purgar dois vetores críticos de entropia de software:
+  1. *Código Morto / Inalcançável (Dead Code):* elementos de código declarados (classes, métodos, variáveis, imports) que não possuem caminho de chamada ativo a partir de nenhum ponto de entrada (entrypoint).
+  2. *Código Duplicado / Clones (Code Duplication):* blocos de lógica idênticos (Clone Tipo 1), renomeados (Clone Tipo 2) ou semanticamente equivalentes (Clone Tipo 3) espalhados pelo repositório.
+- **Contexto:** Sistemas em evolução contínua, migrações de versão, refatorações onde código legado foi substituído mas mantido por receio de remoção, e desenvolvimento distribuído com múltiplos times recriando regras semelhantes.
+- **Aplicabilidade:** Em toda revisão de Pull Request, inspeção contínua de branch e auditorias de qualidade pré-release.
+- **Exemplo estrutural:**
+  - *Código Morto:* O método `processarPagamentoV1()` foi substituído por `processarPagamentoV2()`. As rotas HTTP invocam apenas a V2, mas a V1 permaneceu no arquivo. Nenhuma rota ou worker a alcança; sua permanência polui o codebase e consome manutenção.
+  - *Código Duplicado:* A validação de documento fiscal (cálculo de dígitos verificadores) está copiada dentro de `CadastroClienteController` e repetida em `EmissaoNotaController` com variáveis renomeadas. A solução coesa é extrair a validação para o *Value Object* `DocumentoFiscal` no domínio, eliminando a duplicação e estabelecendo ponto único de verdade.
+- **Métricas de QA (KPIs):**
+  - **% DUP (Taxa de Duplicação):** $(\text{SLOC Duplicado} / \text{SLOC Total}) \times 100$ — *Meta recomendada: $< 3\%$*.
+  - **% DEAD (Índice de Código Morto):** $(\text{Símbolos Inalcançáveis} / \text{Total de Símbolos}) \times 100$ — *Meta recomendada: $0\%$ em produção*.
+  - **Trash SLOC:** Total de linhas de código passíveis de purgação imediata sem impacto comportamental.
+- **Impacto de não adotar:** Elevação da superfície de ataque (código legado com vulnerabilidades continua compilado no binário/container); inconsistência de regras quando um bug é corrigido em um clone mas esquecido nos demais; inflação desnecessária do tempo de compilação e custo de manutenção cognitiva.
+- **Visão SE:** Código morto confunde o design arquitetural e ilude revisores; código duplicado viola o DRY e corrói a coesão do domínio.
+- **Visão DevOps:** Código morto e duplicado infla o tamanho de imagens Docker e bundles de produção, consome memória desnecessária e eleva o tempo de build em pipelines.
+
+---
+
+### ETAPA 18 — Relação Cruzada Completa
 
 | Elemento | Sigla | Como preserva coesão | Como reduz acoplamento | Impacto se não adotado | Visão SE | Visão DevOps |
 |---|---|---|---|---|---|---|
@@ -281,10 +306,11 @@ Os padrões e arquiteturas deste artigo operam em três camadas complementares. 
 | DDD Context | DDD | Modelo coeso dentro de fronteiras explícitas | Contextos não compartilham modelos diretamente | Domínio cresce sem controle; fronteiras erradas | Coesão do domínio em sistemas grandes | Deploy independente por contexto de negócio |
 | Observabilidade | — | Sistema se conhece sob falha | Nenhum componente oculta falha | Falhas invisíveis; rollback sem base de avaliação | Parte do contrato arquitetural | Requisito para CI/CD seguro |
 | Pragmatismo | — | Complexidade sempre justificada | Nenhum padrão usado sem propósito claro | Over-engineering aumenta acoplamento acidental | Maturidade arquitetural | Operação simples, custo baixo |
+| QA / Higienização | DCE/CPD | Remove lixo sem responsabilidade | Centraliza lógica em abstração única | Código morto vaza segurança; clones geram inconsistência | Elimina entropia e clareia design | Reduz tamanho de build e container |
 
 ---
 
-### ETAPA 18 — Conclusão
+### ETAPA 19 — Conclusão
 
 Alta coesão e baixo acoplamento não são princípios abstratos — são critérios operacionais que guiam desde a estrutura interna de um módulo (HC/BA, MVC, GoF, DI) até a arquitetura distribuída (MVVM, Clean/Hex, EDA, CQRS, DDD) e a operação real (Observabilidade, Pragmatismo). Cada padrão opera em sua camada; nenhum substitui o outro — eles se complementam.
 
@@ -304,7 +330,8 @@ REFERENCIA: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/RE
 
 =========================================================================
 ENTRADA: <caminho-do-repositorio> ou <lista-de-arquivos>
-SAIDA:   Relatorio (3 paragrafos) + Tabela de risco de segurança
+SAIDA:   Relatorio (3 paragrafos) + Tabela de risco + Propostas em Diff
+GUARDRAIL: Modo Somente-Leitura (NUNCA modificacao direta de codigo)
 =========================================================================
 
 -------------------------------------------------------------------------
@@ -352,6 +379,42 @@ Referencia: ETAPAS 1 e 3 do artigo
   CALCULE:
     - % de arquivos com alta coesao
     - % de arquivos com baixo acoplamento
+
+-------------------------------------------------------------------------
+PASSO 2.1 — HIGIENIZACAO DE CODIGO (DEAD CODE & DUPLICACAO)
+Agentes: Agente-SE + Agente-DevOps
+Referencia: ETAPA 17 do artigo (DCE/CPD)
+-------------------------------------------------------------------------
+
+  // --- 1. Mapeamento de Entrypoints ---
+  IDENTIFIQUE todos os pontos de entrada legitimos da aplicacao:
+    - Endpoints HTTP (Controllers, Handlers de rotas)
+    - Consumidores assincronos (EDA Listeners, Message Consumers)
+    - Comandos CLI, Tasks agendadas (Cron jobs, funcoes main)
+
+  // --- 2. Grafo de Alcancabilidade (Dead Code) ---
+  PARA CADA classe, funcao e metodo publico/privado declarado:
+    TRACE se existe cadeia de chamada partindo de um entrypoint ativo
+    SE nenhuma cadeia atinge o simbolo:
+      VERIFIQUE se e referenciado apenas em arquivos de teste:
+        SE sim -> MARQUE: "Codigo zumbi mantido por teste obsoleto"
+        SE nao -> MARQUE: "Codigo morto puro (Dead Code)"
+      REGISTRE evidencia: arquivo, linha e nome do simbolo
+
+  // --- 3. Deteccao de Clones Semanticos (Duplicacao) ---
+  COMPARE blocos logicos entre arquivos:
+    - Clone Tipo 1: Codigo identico copiado (Copy-Paste)
+    - Clone Tipo 2: Mesma logica com nomes de variaveis ou DTOs alterados
+    - Clone Tipo 3: Mesma regra de negocio implementada com sintaxe diferente
+    SE clone identificado:
+      REGISTRE: arquivos envolvidos e linhas duplicadas
+      SUGIRA refatoracao: extrair para Value Object, Strategy ou Helper coeso
+
+  // --- 4. Calculo de Metricas de QA ---
+  CALCULE:
+    - % DUP  = (Linhas Duplicadas / SLOC Total) * 100  -> meta: < 3%
+    - % DEAD = (Simbolos Inalcancaveis / Total Simbolos) * 100 -> meta: 0%
+    - Trash SLOC = Total de linhas a purgar
 
 -------------------------------------------------------------------------
 PASSO 3 — MODELO ARQUITETURAL
@@ -439,19 +502,20 @@ PASSO 6 — CONFERENCIA CRUZADA
 Agentes: Todos
 -------------------------------------------------------------------------
 
-  Agente-SE       : apresenta resultados dos PASSOS 1 a 4
-  Agente-DevOps   : apresenta resultados do PASSO 5
+  Agente-SE       : apresenta resultados dos PASSOS 1, 2, 2.1, 3 e 4
+  Agente-DevOps   : apresenta resultados dos PASSOS 2.1 (impacto de build) e 5
   Agente-Sec      : revisa a tabela de risco
                     — evidencias estao citadas com localizacao no codigo?
                     — gravidades seguem os criterios do artigo?
                     — ha riscos novos nao cobertos pela tabela padrao?
-  Agente-Prag     : revisa PASSO 4
+  Agente-Prag     : revisa PASSO 4 e PASSO 2.1
                     — cada padrao tem justificativa real de uso?
                     — algum padrao esta presente so por convencao?
                     — o custo de manutencao do padrao supera o beneficio?
+                    — o plano de purga de codigo morto e duplicação e seguro?
 
   SE ha divergencia entre agentes:
-    Agente-Prag decide com base no artigo (ETAPAS 1 a 18)
+    Agente-Prag decide com base no artigo (ETAPAS 1 a 19)
     REGISTRE: a divergencia, a perspectiva de cada agente e a decisao tomada
 
 -------------------------------------------------------------------------
@@ -461,6 +525,9 @@ Agentes: Todos — Agente-Prag consolida
 
   PRODUZA: texto corrido (3 paragrafos conforme PARTE IV)
   PRODUZA: tabela de risco preenchida (conforme PARTE V)
+  PRODUZA: propostas de correcao como blocos diff isolados (plano de refatoracao)
+           NOTA: O agente NUNCA aplica modificacoes diretamente;
+                 aguarda aprovacao formal e revisada do engenheiro humano.
   REGISTRE percentuais de aderencia por camada:
     - Apresentacao  (MVC / MVVM):                     [Y]%
     - Dominio       (Clean/Hex, DDD, CQRS):           [Z]%
@@ -486,7 +553,7 @@ PASSO 8 — CONTINUIDADE
 
 | Persona | Nome | Função principal | O que confere especificamente |
 |---|---|---|---|
-| Analista SE | **Agente-SE** | Avalia coesão, acoplamento, arquitetura, patterns | Se o código segue MVC, Clean, EDA, CQRS, DDD conforme ETAPAS 3–14 |
+| Analista SE | **Agente-SE** | Avalia coesão, acoplamento, arquitetura, patterns, dead code e duplicação | Se o código segue MVC, Clean, EDA, CQRS, DDD e DCE/CPD conforme ETAPAS 3–17 |
 | Analista DevOps | **Agente-DevOps** | Avalia observabilidade, CI/CD, deploy, risco operacional | Se há logs, métricas, tracing, automação e rollback (ETAPA 15) |
 | Auditor de Segurança | **Agente-Sec** | Avalia risco e impacto de segurança | Se a tabela de risco tem evidências, gravidades corretas e cobre todos os gaps |
 | Revisor Pragmático | **Agente-Prag** | Confere over-engineering; decide divergências | Se cada padrão tem justificativa real (ETAPA 16); consolida o relatório final |
@@ -527,6 +594,8 @@ Do ponto de vista da segurança da informação, o nível de risco consolidado �
 | CQRS sem separação de acesso | Command e Query usam mesmo repositório com permissões idênticas | **Médio** | Escrita acidental via query; falta de controle diferenciado | Separar repositórios; definir permissões por tipo de operação |
 | DI ausente em pontos críticos | Controller instancia dependências diretamente (`new ServiceConcreto()`) | **Alto** | Troca de implementação exige alterar código-fonte; deploy arriscado | Injetar todas as dependências via construtor ou container |
 | Pragmatismo ignorado | Adapter entre interfaces idênticas; Factory para objeto único imutável | **Baixo** | Custo de manutenção aumenta sem benefício arquitetural | Auditar cada padrão; remover onde não agrega coesão ou reduz acoplamento |
+| Código morto em produção | Métodos obsoletos ou não invocados mantidos em classes ativas | **Médio** | Superfície de ataque oculta; dependências vulneráveis mantidas sem uso | Purgar código morto e testes legados correspondentes |
+| Código duplicado crítico | Regras de validação ou cálculo copiadas em múltiplos serviços | **Alto** | Inconsistência de negócio; correção de falha em um clone não alcança os demais | Extrair para Value Object ou componente compartilhado |
 
 ---
 
@@ -543,6 +612,8 @@ Regras que **nunca** devem ser violadas durante a execução desta skill:
 4. **Padrão presente sem justificativa = over-engineering registrado** — se um padrão existe mas não serve a uma responsabilidade coesa do módulo, registre, documente a evidência e reduza o percentual de aderência. Complexidade acidental é um risco arquitetural.
 
 5. **A avaliação não é pontual — é contínua** — o pseudo-algoritmo deve ser reexecutado a cada commit, pull request ou deploy significativo. A tabela de risco deve ser mantida viva, não arquivada após o primeiro uso.
+
+6. **Proibição de mutação direta (Modo Proposição / Human-in-the-Loop)** — O agente atua estritamente como Auditor/Avaliador. É terminantemente proibido modificar, reescrever ou excluir arquivos diretamente no codebase auditado. Toda recomendação de correção, eliminação de dead code ou refatoração deve ser estruturada como proposta formal (bloco diff/patch), acompanhada de justificativa arquitetural e plano de rollback. A aplicação de qualquer alteração depende obrigatoriamente de autorização humana explícita e revisada.
 
 ---
 
@@ -563,5 +634,5 @@ A skill não substitui o artigo — ela o opera. Cada parte tem um papel especí
 
 ---
 
-*Skill consolidada — v2.1 — Eduardo Bastos*
+*Skill consolidada — v2.2 — Eduardo Bastos*
 *Artigo de referência: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/README.md*

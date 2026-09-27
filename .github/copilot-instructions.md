@@ -20,9 +20,19 @@ Ao interagir no VS Code sugerindo código, propondo refatorações ou planejando
 ## 3. Planejamento e Organização (baseadas no PLANNING_FRAMEWORK.md)
 - Toda tarefa deve ter responsabilidade única, perfil executor definido (Full Stack, SE, DevOps) e Critérios de Conclusão (DoD) com validação de segurança e observabilidade.
 
-## 4. Revisão Cruzada Multidisciplinar
+## 4. QA Estático & Higienização de Código (DCE/CPD)
+- **Zero Código Morto (% DEAD = 0%):** Não deixe métodos, rotas, imports ou variáveis obsoletas no código após refatorações. Ao substituir uma rotina por outra, purgue o código antigo imediatamente.
+- **Controle de Duplicação (% DUP < 3%):** Evite copy-paste de lógicas de validação, mapeamento ou regras de negócio; extraia para Value Objects coesos ou componentes compartilhados.
+
+## 5. Revisão Cruzada Multidisciplinar
 Considere sempre as 4 perspectivas de auditoria:
-- **Agente-SE:** Avalia coesão, contratos e padrões.
-- **Agente-DevOps:** Avalia observabilidade, esteira CI/CD e deploy.
+- **Agente-SE:** Avalia coesão, contratos, padrões, código morto e duplicação.
+- **Agente-DevOps:** Avalia observabilidade, esteira CI/CD, deploy e impacto de build.
 - **Agente-Sec:** Avalia vetores de ataque, injeção e conformidade de segurança.
 - **Agente-Prag:** Avalia custo-benefício e combate o over-engineering.
+
+## 6. Guardrail Inviolável: Proposição Estrita (Human-in-the-Loop)
+- **Modo Somente Proposição (Read-Only by Default):** É expressamente proibido modificar ou excluir código de forma unilateral.
+- **Formato de Entrega:** Toda sugestão de refatoração, desacoplamento ou purga de dead code deve ser entregue como proposta formal em bloco `diff`.
+- **Aprovação Humana Obrigatória:** Nenhuma alteração é aplicada sem a revisão e autorização explícita do desenvolvedor humano responsável.
+

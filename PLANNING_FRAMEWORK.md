@@ -189,6 +189,8 @@ Critério de Conclusão (Definition of Done):
   [ ] Testes automatizados cobrindo o contrato (unit + integration)
   [ ] Observabilidade: logs estruturados e trace_id presentes
   [ ] Segurança: princípio(s) aplicável(is) verificado(s)
+  [ ] Higienização: sem código morto (% DEAD = 0%) e duplicação contida (% DUP < 3% — ETAPA 17)
+  [ ] Guardrail HITL: propostas de IA revisadas e autorizadas formalmente por humano (Regra 6)
   [ ] Documentação de decisão arquitetural registrada (se aplicável)
   [ ] CI/CD passou sem erros de segurança (SAST/DAST — Princípio 5)
 
@@ -205,6 +207,7 @@ Referência Segurança:   [Princípio(s) aplicável(is)]
 | **Refatoração arquitetural** | SE | Agente-Prag (pragmatismo) | Não aumenta complexidade sem benefício; cobertura de testes antes e depois |
 | **Pipeline / Infraestrutura** | DevOps | SE (contratos de observabilidade) | Observabilidade nativa; rollback documentado; segredos gerenciados |
 | **Segurança / Hardening** | SE + DevOps (Agente-Sec) | Todos | Princípio(s) aplicado(s); tabela de risco atualizada |
+| **Higienização / QA de Código** | SE + FS | Agente-Prag + DevOps | % DEAD = 0%; % DUP < 3%; purgação de código zumbi (ETAPA 17) |
 | **Débito técnico** | SE | Agente-Prag | Justificativa clara; reduz acoplamento ou aumenta coesão; testes preservados |
 
 ---
@@ -302,6 +305,7 @@ AO ABRIR UM PULL REQUEST:
   [ ] A tarefa respeita a anatomia de tarefa coesa (uma responsabilidade)?
   [ ] O perfil executor está correto (FS / SE / DevOps)?
   [ ] Os critérios de conclusão (DoD) estão todos marcados?
+  [ ] Código higienizado: sem métodos mortos (% DEAD = 0%) e clones de lógica (% DUP < 3%)?
   [ ] A referência à ETAPA do SKILL.md está documentada?
   [ ] O princípio de segurança aplicável foi verificado?
 
@@ -309,6 +313,7 @@ AO FAZER MERGE:
   [ ] CI/CD passou sem erros de segurança (SAST/DAST)?
   [ ] Observabilidade mantida ou melhorada?
   [ ] Nenhuma regressão de coesão/acoplamento introduzida?
+  [ ] Guardrail HITL: nenhuma alteração gerada por IA foi mesclada sem aprovação humana?
 
 AO FECHAR UM SPRINT / CICLO:
   [ ] Percentuais de aderência arquitetural mantidos ou melhorados?
@@ -343,10 +348,10 @@ Este framework não opera isolado. Cada fase referencia e depende dos outros doc
 | Fase do Framework | Documento Principal | Seção de Referência |
 |---|---|---|
 | FASE 0 — Leitura de Natureza | [SKILL.md](./SKILL.md) | ETAPA 2 (Meta-Relação), ETAPA 16 (Pragmatismo) |
-| FASE 1 — Planejamento — Arquitetura | [SKILL.md](./SKILL.md) | ETAPAS 1 a 18 (Artigo Técnico Completo) |
+| FASE 1 — Planejamento — Arquitetura | [SKILL.md](./SKILL.md) | ETAPAS 1 a 19 (Artigo Técnico Completo) |
 | FASE 1 — Planejamento — Segurança | [PRINCIPIOS_SEGURANCA.md](./PRINCIPIOS_SEGURANCA.md) | Princípios por Tipo de Projeto |
 | FASE 2 — Definição de Tarefas — Perfis | Perfis FS / SE / DevOps | Matriz Comparativa de Perfis |
-| FASE 2 — Definição de Tarefas — Avaliação | [SKILL.md](./SKILL.md) | PARTE II (Pseudo-algoritmo), PARTE III (Personas) |
+| FASE 2 — Definição de Tarefas — Avaliação | [SKILL.md](./SKILL.md) | PARTE II (Passos 1 a 2.1), PARTE III (Personas) |
 | FASE 3 — Organização — Risco | [SKILL.md](./SKILL.md) | PARTE V (Tabela de Risco de Segurança) |
 | FASE 4 — Revisão Contínua — Relatório | [SKILL.md](./SKILL.md) | PARTE IV (Modelo de Relatório), PARTE VI (Pitfalls) |
 

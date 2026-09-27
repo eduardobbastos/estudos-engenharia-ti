@@ -309,7 +309,7 @@ SAIDA:   Relatorio (3 paragrafos) + Tabela de risco de segurança
 
 -------------------------------------------------------------------------
 PASSO 1 — INVENTARIO
-Agente: Demerzel-SE
+Agente: Agente-SE
 -------------------------------------------------------------------------
 
   LISTE todos os arquivos do repositorio com path relativo
@@ -325,7 +325,7 @@ Agente: Demerzel-SE
 
 -------------------------------------------------------------------------
 PASSO 2 — COESAO E ACOPLAMENTO
-Agente: Demerzel-SE
+Agente: Agente-SE
 Referencia: ETAPAS 1 e 3 do artigo
 -------------------------------------------------------------------------
 
@@ -355,7 +355,7 @@ Referencia: ETAPAS 1 e 3 do artigo
 
 -------------------------------------------------------------------------
 PASSO 3 — MODELO ARQUITETURAL
-Agente: Demerzel-SE
+Agente: Agente-SE
 Referencia: ETAPAS 3, 10, 11, 12, 13, 14 do artigo
 -------------------------------------------------------------------------
 
@@ -377,7 +377,7 @@ Referencia: ETAPAS 3, 10, 11, 12, 13, 14 do artigo
 
 -------------------------------------------------------------------------
 PASSO 4 — PADROES GOF, DI E PRAGMATISMO
-Agentes: Demerzel-SE + Demerzel-Prag
+Agentes: Agente-SE + Agente-Prag
 Referencia: ETAPAS 4 a 9 (padroes) e ETAPA 16 (pragmatismo)
 -------------------------------------------------------------------------
 
@@ -407,7 +407,7 @@ Referencia: ETAPAS 4 a 9 (padroes) e ETAPA 16 (pragmatismo)
 
 -------------------------------------------------------------------------
 PASSO 5 — DEVOPS E OBSERVABILIDADE
-Agente: Demerzel-DevOps
+Agente: Agente-DevOps
 Referencia: ETAPA 15 do artigo
 -------------------------------------------------------------------------
 
@@ -439,24 +439,24 @@ PASSO 6 — CONFERENCIA CRUZADA
 Agentes: Todos
 -------------------------------------------------------------------------
 
-  Demerzel-SE     : apresenta resultados dos PASSOS 1 a 4
-  Demerzel-DevOps : apresenta resultados do PASSO 5
-  Demerzel-Sec    : revisa a tabela de risco
+  Agente-SE       : apresenta resultados dos PASSOS 1 a 4
+  Agente-DevOps   : apresenta resultados do PASSO 5
+  Agente-Sec      : revisa a tabela de risco
                     — evidencias estao citadas com localizacao no codigo?
                     — gravidades seguem os criterios do artigo?
                     — ha riscos novos nao cobertos pela tabela padrao?
-  Demerzel-Prag   : revisa PASSO 4
+  Agente-Prag     : revisa PASSO 4
                     — cada padrao tem justificativa real de uso?
                     — algum padrao esta presente so por convencao?
                     — o custo de manutencao do padrao supera o beneficio?
 
   SE ha divergencia entre agentes:
-    Demerzel-Prag decide com base no artigo (ETAPAS 1 a 18)
+    Agente-Prag decide com base no artigo (ETAPAS 1 a 18)
     REGISTRE: a divergencia, a perspectiva de cada agente e a decisao tomada
 
 -------------------------------------------------------------------------
 PASSO 7 — RELATORIO FINAL
-Agentes: Todos — Demerzel-Prag consolida
+Agentes: Todos — Agente-Prag consolida
 -------------------------------------------------------------------------
 
   PRODUZA: texto corrido (3 paragrafos conforme PARTE IV)
@@ -486,10 +486,10 @@ PASSO 8 — CONTINUIDADE
 
 | Persona | Nome | Função principal | O que confere especificamente |
 |---|---|---|---|
-| Analista SE | **Demerzel-SE** | Avalia coesão, acoplamento, arquitetura, patterns | Se o código segue MVC, Clean, EDA, CQRS, DDD conforme ETAPAS 3–14 |
-| Analista DevOps | **Demerzel-DevOps** | Avalia observabilidade, CI/CD, deploy, risco operacional | Se há logs, métricas, tracing, automação e rollback (ETAPA 15) |
-| Auditor de Segurança | **Demerzel-Sec** | Avalia risco e impacto de segurança | Se a tabela de risco tem evidências, gravidades corretas e cobre todos os gaps |
-| Revisor Pragmático | **Demerzel-Prag** | Confere over-engineering; decide divergências | Se cada padrão tem justificativa real (ETAPA 16); consolida o relatório final |
+| Analista SE | **Agente-SE** | Avalia coesão, acoplamento, arquitetura, patterns | Se o código segue MVC, Clean, EDA, CQRS, DDD conforme ETAPAS 3–14 |
+| Analista DevOps | **Agente-DevOps** | Avalia observabilidade, CI/CD, deploy, risco operacional | Se há logs, métricas, tracing, automação e rollback (ETAPA 15) |
+| Auditor de Segurança | **Agente-Sec** | Avalia risco e impacto de segurança | Se a tabela de risco tem evidências, gravidades corretas e cobre todos os gaps |
+| Revisor Pragmático | **Agente-Prag** | Confere over-engineering; decide divergências | Se cada padrão tem justificativa real (ETAPA 16); consolida o relatório final |
 
 **Regra fundamental:** Nunca aceite a conclusão de um único agente sem conferência cruzada — cada perspectiva (SE, DevOps, Segurança, Pragmatismo) enxerga dimensões diferentes do mesmo problema.
 

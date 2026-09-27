@@ -1,7 +1,7 @@
 ---
 name: analista-arquitetura-codigo
-version: 1.0
-description: Skill para agentes de IA avaliarem aderência de código fonte aos princípios do artigo (coerência, acoplamento, MVC, patterns, DevOps, pragmatismo) e gerar relatório percentual com classificação de risco de segurança.
+version: 1.1
+description: Skill para agentes de IA avaliarem aderência de código fonte aos princípios do artigo (coerência, acoplamento, MVC, patterns, DevOps, pragmatismo) e gerar relatório percentual com classificação de risco de segurança. Artigo de referência: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/ARTIGO_COMPLETO.md
 ---
 
 ## Pseudo-Algoritmo (Sequência de Prompts)

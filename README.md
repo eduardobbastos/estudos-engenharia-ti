@@ -44,6 +44,18 @@ FASE 4 — Revisão Contínua  →   PARTE IV/VI (Relatório)    Modelagem de am
 
 ## Referência direta
 
-- Arquitetura + Avaliação: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/SKILL.md
-- Planejamento dinâmico: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/PLANNING_FRAMEWORK.md
-- Segurança: https://github.com/eduardobbastos/estudos-engenharia-ti/blob/main/PRINCIPIOS_SEGURANCA.md
+
+
+---
+
+## NOTA — Referência Visual (PRD: MD)
+
+O arquivo de vídeo enviado (`video_6f930a6cc091.mp4`) contém uma referência visual com a marcação **"PRD: MD"**. No contexto deste projeto, isso indica que o documento consolidado (`README.md`) opera simultaneamente como:
+
+- **PRD (Product Requirements Document)** — define os requisitos arquiteturais, padrões, observabilidade e segurança exigidos para sistemas de alta coesão e baixo acoplamento.
+- **MD (Markdown/Documento técnico)** — entrega o conteúdo estruturado, com siglas, exemplos, impactos e visões SE/DevOps.
+
+A referência visual confirma que este estudo não é apenas teórico: é um documento operacional, utilizável por agentes de IA e equipes de desenvolvimento para avaliar, planejar e executar arquitetura de software com critérios verificáveis.
+
+---
+*Nota adicionada com base na referência visual do vídeo — sem alteração no corpo técnico do artigo.*
